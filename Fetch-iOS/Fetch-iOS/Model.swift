@@ -24,12 +24,30 @@ struct MealDetail: Codable {
     private enum CodingKeys: String, CodingKey {
         case mealThumbnail = "strMealThumb"
         case ingredients = "strIngredient"
-        case measurements = "strMeasurements"
+        case measurements = "strMeasure"
         case instructions = "strInstructions"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         mealThumbnail = try container.decode(String.self, forKey: .mealThumbnail)
+        instructions = try container.decode(String.self, forKey: .instructions)
+        
+        var ingridents: [String] = []
+        var measurements: [String] = []
+        
+        for key in container.allKeys {
+            if key.stringValue.hasPrefix("strIngredient") {
+                if let ingrident = try container.decodeIfPresent(String.self, forKey: key) {
+                    ingridents.append(ingrident)
+                }
+            } else if key.stringValue.hasPrefix("strMeasure") {
+                if let measurement = try container.decodeIfPresent(String.self, forKey: key) {
+                    measurements.append(measurement)
+                }
+            }
+        }
+        self.ingredients = ingridents.filter { !$0.isEmpty }
+        self.measurements = measurements.filter { !$0.isEmpty }
     }
 }
