@@ -8,6 +8,54 @@
 import XCTest
 @testable import Fetch_iOS
 
+class MealViewModelTests: XCTestCase {
+    var mealViewModel: MealViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        mealViewModel = MealViewModel()
+    }
+    
+    override func tearDown() {
+        mealViewModel = nil
+        super.tearDown()
+    }
+    
+    func testFetchMeals() {
+        let expectation = XCTestExpectation(description: "Fetch meals")
+        
+        mealViewModel.fetchMeals()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // Assert that meals array is not empty after fetching
+            XCTAssertFalse(self.mealViewModel.meals.isEmpty)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 3.0)
+    }
+}
+
+
+class ContentViewTests: XCTestCase {
+    
+    func testMealViewModelFetch() {
+        let viewModel = MealViewModel()
+        let expectation = XCTestExpectation(description: "Fetch meals")
+        
+        viewModel.fetchMeals()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            XCTAssertFalse(viewModel.meals.isEmpty)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 3)
+    }
+}
+
+
+
 final class Fetch_iOSTests: XCTestCase {
 
     override func setUpWithError() throws {
