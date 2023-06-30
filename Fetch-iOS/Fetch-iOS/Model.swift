@@ -9,45 +9,85 @@ import Foundation
 import URLImage
 
 struct Meal: Identifiable, Codable {
-    var id = UUID()
-    let mealId: String
-    let mealName: String
-    let mealThumbnail: String
+    let id = UUID()
+    let idMeal: String
+    let strMeal: String
+    let strMealThumb: String
 }
 
 struct MealDetail: Codable {
-    let mealThumbnail: String
-    let ingredients: [String]
-    let measurements: [String]
-    let instructions: String
+    let strMealThumb: String
     
-    private enum CodingKeys: String, CodingKey {
-        case mealThumbnail = "strMealThumb"
-        case ingredients = "strIngredient"
-        case measurements = "strMeasure"
-        case instructions = "strInstructions"
+    
+   // let strInstructions: String
+    let strIngredient1: String?
+    let strIngredient2: String?
+    let strIngredient3: String?
+    let strIngredient4: String?
+    let strIngredient5: String?
+    let strIngredient6: String?
+    let strIngredient7: String?
+    let strIngredient8: String?
+    let strIngredient9: String?
+    let strIngredient10: String?
+    let strIngredient11: String?
+    let strIngredient12: String?
+    let strIngredient13: String?
+    let strIngredient14: String?
+    let strIngredient15: String?
+    let strIngredient16: String?
+    let strIngredient17: String?
+    let strIngredient18: String?
+    let strIngredient19: String?
+    let strIngredient20: String?
+    
+    
+    let strMeasure1: String?
+    let strMeasure2: String?
+    let strMeasure3: String?
+    let strMeasure4: String?
+    let strMeasure5: String?
+    let strMeasure6: String?
+    let strMeasure7: String?
+    let strMeasure8: String?
+    let strMeasure9: String?
+    let strMeasure10: String?
+    let strMeasure11: String?
+    let strMeasure12: String?
+    let strMeasure13: String?
+    let strMeasure14: String?
+    let strMeasure15: String?
+    let strMeasure16: String?
+    let strMeasure17: String?
+    let strMeasure18: String?
+    let strMeasure19: String?
+    let strMeasure20: String?
+    let strMeasure21: String?
+    let strMeasure22: String?
+    let strMeasure23: String?
+    
+    
+    
+    var ingredients: [String] {
+        let ingredientStrings = [
+            strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
+            strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10,
+            strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15,
+            strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20
+        ]
+        
+        return ingredientStrings.compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        mealThumbnail = try container.decode(String.self, forKey: .mealThumbnail)
-        instructions = try container.decode(String.self, forKey: .instructions)
+    
+    var Measurements: [String] {
+        let MeasurementsStrings = [
+            strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5,
+            strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10,
+            strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15,
+            strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20
+        ]
         
-        var ingridents: [String] = []
-        var measurements: [String] = []
-        
-        for key in container.allKeys {
-            if key.stringValue.hasPrefix("strIngredient") {
-                if let ingrident = try container.decodeIfPresent(String.self, forKey: key) {
-                    ingridents.append(ingrident)
-                }
-            } else if key.stringValue.hasPrefix("strMeasure") {
-                if let measurement = try container.decodeIfPresent(String.self, forKey: key) {
-                    measurements.append(measurement)
-                }
-            }
-        }
-        self.ingredients = ingridents.filter { !$0.isEmpty }
-        self.measurements = measurements.filter { !$0.isEmpty }
+        return MeasurementsStrings.compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
     }
 }
