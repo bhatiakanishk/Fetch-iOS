@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class MealViewModel: ObservableObject {
     @Published var meals: [Meal] = []
     
     func fetchMeals() {
