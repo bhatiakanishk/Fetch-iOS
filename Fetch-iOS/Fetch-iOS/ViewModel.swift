@@ -15,6 +15,8 @@ class MealViewModel: ObservableObject {
         else {
             return
         }
+        
+        // Perform a URLSession data task to fetch meal data from the provided URL
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data
             else {
@@ -23,14 +25,17 @@ class MealViewModel: ObservableObject {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                // Decode the JSON response into a MealResponse object
                 let response = try decoder.decode(MealResponse.self, from: data)
                 DispatchQueue.main.async {
+                    // Update the meals array with the fetched meals on the main queue
                     self.meals = response.meals
                     print("Meals: ", self.meals)
                 }
             } catch {
                 print("Error decoding JSON: \(error)")
             }
+            // Start the URLSession data task
         }.resume()
     }
 }

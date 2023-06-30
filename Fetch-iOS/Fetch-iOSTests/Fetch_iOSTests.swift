@@ -13,10 +13,13 @@ class MealViewModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
+        // Create an instance of MealViewModel for testing
         mealViewModel = MealViewModel()
     }
     
     override func tearDown() {
+        // Clean up the mealViewModel instance after each test
         mealViewModel = nil
         super.tearDown()
     }
@@ -24,32 +27,47 @@ class MealViewModelTests: XCTestCase {
     func testFetchMeals() {
         let expectation = XCTestExpectation(description: "Fetch meals")
         
+        // Call the fetchMeals method to initiate the fetching process
         mealViewModel.fetchMeals()
         
+        // Wait for a certain amount of time to allow the fetch to complete
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Assert that meals array is not empty after fetching
+            // Assert that the meals array is not empty after fetching
             XCTAssertFalse(self.mealViewModel.meals.isEmpty)
+            
+            // Fulfill the expectation to indicate that the test has completed successfully
             expectation.fulfill()
         }
         
+        // Wait for the expectation to be fulfilled within the given timeout period
         wait(for: [expectation], timeout: 3.0)
     }
 }
 
 
+
 class ContentViewTests: XCTestCase {
     
     func testMealViewModelFetch() {
+        // Create an instance of MealViewModel for testing
         let viewModel = MealViewModel()
+        
+        // Create an expectation with a description for the test
         let expectation = XCTestExpectation(description: "Fetch meals")
         
+        // Call the fetchMeals method to initiate the fetching process
         viewModel.fetchMeals()
         
+        // Wait for a certain amount of time to allow the fetch to complete
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // Assert that the meals array is not empty after fetching
             XCTAssertFalse(viewModel.meals.isEmpty)
+            
+            // Fulfill the expectation to indicate that the test has completed successfully
             expectation.fulfill()
         }
         
+        // Wait for the expectation to be fulfilled within the given timeout period
         wait(for: [expectation], timeout: 3)
     }
 }
