@@ -11,8 +11,8 @@ import SwiftUI
 class MealDetailViewModel: ObservableObject {
     @Published var mealDetail: MealDetail?
     
-    func fetchMealDetail(mealId: String) {
-        guard let url = URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(mealId)")
+    func fetchMealDetail(idMeal: String) {
+        guard let url = URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(idMeal)")
         else {
             return
         }
