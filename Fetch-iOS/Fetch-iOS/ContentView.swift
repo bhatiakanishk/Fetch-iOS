@@ -6,21 +6,49 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+    
+    @ObservedObject var mealViewModel = MealViewModel()
+    @State private var selectedMeal: Meal? = nil
+
+        var body: some View {
+            NavigationView {
+                List(mealViewModel.meals) { meal in
+                    VStack(alignment: .leading) {
+                        Text(meal.strMeal)
+                            .font(.headline)
+                    }
+                    .onTapGesture {
+                        selectedMeal = meal
+                    }
+                }
+                .navigationBarTitle("Desserts")
+                .sheet(item: $selectedMeal) { meal in
+                    MealDetailView(meal: meal)
+                }
+            }
+            .onAppear {
+                mealViewModel.fetchMeals()
+            }
         }
-        .padding()
     }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+struct RemoteImage: View {
+    let urlString: String
+    
+    var body: some View {
+        URLImage(URL(string: urlString)!) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 200)
+        }
     }
 }
