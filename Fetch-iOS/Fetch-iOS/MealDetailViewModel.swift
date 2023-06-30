@@ -17,6 +17,7 @@ class MealDetailViewModel: ObservableObject {
             return
         }
         
+        // Perform a URLSession data task to fetch meal detail data from the provided URL
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching meal detail:  \(error.localizedDescription)")
@@ -26,9 +27,11 @@ class MealDetailViewModel: ObservableObject {
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    // Decode the JSON response into a MealDetailResponse object
                     let response = try decoder.decode(MealDetailResponse.self, from: data)
                     if let meal = response.meals.first {
                         DispatchQueue.main.async {
+                            // Update the mealDetail object with the fetched meal detail on the main queue
                             self.mealDetail = meal
                         }
                     }
@@ -36,7 +39,7 @@ class MealDetailViewModel: ObservableObject {
                     print("Error decoding meal detail response: \(error.localizedDescription) ")
                 }
             }
-        }.resume()
+        }.resume() // Start the URLSession data task
     }
 }
 
