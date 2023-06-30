@@ -15,6 +15,7 @@
 		B63BF3742A4E419500054101 /* Fetch_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BF3732A4E419500054101 /* Fetch_iOSUITests.swift */; };
 		B63BF3762A4E419500054101 /* Fetch_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BF3752A4E419500054101 /* Fetch_iOSUITestsLaunchTests.swift */; };
 		B63BF3842A4E458C00054101 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = B63BF3832A4E458C00054101 /* URLImage */; };
+		B63BF3862A4E470900054101 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BF3852A4E470900054101 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B63BF36F2A4E419500054101 /* Fetch-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fetch-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B63BF3732A4E419500054101 /* Fetch_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch_iOSUITests.swift; sourceTree = "<group>"; };
 		B63BF3752A4E419500054101 /* Fetch_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B63BF3852A4E470900054101 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				B63BF3582A4E419300054101 /* Fetch_iOSApp.swift */,
 				B63BF35A2A4E419300054101 /* ContentView.swift */,
+				B63BF3852A4E470900054101 /* Model.swift */,
 				B63BF35C2A4E419400054101 /* Assets.xcassets */,
 				B63BF35E2A4E419400054101 /* Preview Content */,
 			);
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63BF3862A4E470900054101 /* Model.swift in Sources */,
 				B63BF35B2A4E419300054101 /* ContentView.swift in Sources */,
 				B63BF3592A4E419300054101 /* Fetch_iOSApp.swift in Sources */,
 			);
